@@ -1,3 +1,5 @@
+#![no_std]
+
 /// A data structure the exposes the number of fields it has.
 ///
 /// This trait can be derived:
@@ -9,7 +11,7 @@
 /// struct MyStruct
 /// {
 ///    first_field: i32,
-///    second_field: String,
+///    second_field: [u8; 5],
 ///    third_field: u16,
 /// }
 ///
@@ -18,6 +20,7 @@
 pub trait FieldCount {
     /// Get the number of fields on a struct.
     fn field_count() -> usize;
+    // "const fn" would be useful, but "no const fn in trait" yet.
 }
 
 // Export derive macro from derive crate.
@@ -49,7 +52,7 @@ mod tests {
     #[derive(FieldCount)]
     struct MyStruct {
         _first_field: i32,
-        _second_field: String,
+        _second_field: [u8; 5],
         _third_field: u16,
     }
 
